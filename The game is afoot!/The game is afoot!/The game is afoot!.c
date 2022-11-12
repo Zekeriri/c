@@ -2,9 +2,21 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+int Add(int x, int y)
+{
+    int z = 0;
+    z = x + y;
+    return z;
+}
+
 int main()
 {
-	
-	printf("The game is afoot!");
-	return 0;
+    int a = 10;
+    int b = 20;
+    int c = 0;
+
+    c = Add(a, b);
+    printf("%d\n", c);
+
+    return 0;
 }
