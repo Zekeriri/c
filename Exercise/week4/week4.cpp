@@ -1,76 +1,39 @@
-﻿// Practical Exercise 1 (Non-Assessed).cpp : Defines the entry point for the console application.
-//
-
-#include <iostream>
+﻿#include <iostream>
 
 int main()
 {
-	char message1[] = "Give me a first number: ";
-	char message2[] = "\bGive me a second number: ";
-	char message3[] = "\nThe numbers are equal!\n";
-	char message4[] = "\nThe numbers are not equal!\n";
-	char message5[] = "Type in any integer and press ENTER key to finish: ";
-	char format[] = "%d";	// format string for the scanf function
+	int array[3] = { 3,2,1 };
 
-	int first;
-	int second;
-	int end;
+	_asm 
+	{		
+					lea esi, array
+					mov ecx, 3
 
-	_asm {
-		lea		eax, message1
-		push	eax
-		call	printf; printing the first message
-		add		esp, 4
+		outerLoop:  
+					mov edx, ecx
 
-		lea		eax, first
-		push	eax
-		lea		eax, format
-		push	eax
-		call	scanf_s; reading the first number
-		add		esp, 8
+		innerLoop : 
+					cmp edx, ecx
+					jz noExchange
 
-		lea		eax, message2
-		push	eax
-		call	printf; printing the second message
-		add		esp, 4
+					mov eax, [esi + ecx * 4 - 4]
+					mov ebx, [esi + edx * 4 - 4]
 
-		lea		eax, second
-		push	eax
-		lea		eax, format
-		push	eax
-		call	scanf_s; reading the second number
-		add		esp, 8
+					cmp ebx, eax
+					jl noExchange
 
-		mov		eax, first
-		sub		eax, second; compare two numbers, jump to nequal if flag is not zero
-		jnz		nequal
+					mov[esi + ecx * 4 - 4], ebx
+					mov[esi + edx * 4 - 4], eax
+		noExchange : 
+					dec edx
+					jnz innerLoop
 
-		equal :
-		lea		eax, message3
-			push	eax
-			call	printf; printing the third message
-			add		esp, 4
-			jmp		finish
-
-			nequal :
-		lea		eax, message4
-			push	eax
-			call	printf; printing the fourth message
-			add		esp, 4
-
-			finish:
-		lea		eax, message5
-			push	eax
-			call	printf; printing the fifth message
-			add		esp, 4
-
-			lea		eax, end
-			push	eax
-			lea		eax, format
-			push	eax
-			call	scanf_s; reading any integer to end program
-			add		esp, 8
+					loop outerLoop
 	}
+	for (int i = 0; i < 3; i++)
+	{
+		printf("%d ", array[i]);
+	}
+
 	return 0;
 }
-

@@ -8,7 +8,7 @@ int main()
     int sum = 0;
     scanf("%d", &n);
     num_2 = n / 2;
-    num_1 = n % 1;
+    num_1 = n % 2;
     for (int i = 1; i <= n / 2 + 1; i++)
     {
         int a = num_1 + num_2;
