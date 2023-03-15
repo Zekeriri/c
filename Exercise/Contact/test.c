@@ -1,45 +1,62 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
-#include "contact.h"
+#include "contact.h";
 void menu()
 {
-	printf("_____1.add____2.del_____");
-	printf("_____3.search_4.modify__");
-	printf("_____5.show___6.sort____");
-	printf("_____0.exit");
+	printf("________________________\n");
+	printf("_____1.add____2.del_____\n");
+	printf("_____3.search_4.modify__\n");
+	printf("_____5.show___2.sort____\n");
+	printf("_____0.exit\n");
+	printf("________________________\n");
 }
+enum Option
+{
+	EXIT,
+	ADD,
+	DEL,
+	SEARCH,
+	MODIFY,
+	SHOW,
+	SORT
+};
 int main()
 {
 	int input = 0;
-	PeoInfo data[100];
-	int sz;
+	Contact con;
+	//init contact
+	InitContact(&con);
 	do
 	{
 		menu();
-		printf("请选择:>");
+		printf("please choose:>");
 		scanf("%d", &input);
 		switch (input)
 		{
-		case 1:
+		case ADD:
+			AddContact(&con);
 			break;
-		case 2:
+		case DEL:
+			DelContact(&con);
 			break;
-		case 3:
+		case SEARCH:
+			SearchContact(&con);
 			break;
-		case 4:
+		case MODIFY:
+			ModifyContact(&con);
 			break;
-		case 5:
+		case SHOW:
+			ShowContact(&con);
 			break;
-		case 6:
+		case SORT:
 			break;
-		case 0:
-			printf("退出通讯录");
+		case EXIT:
+			SaveContact(&con);
+			DestroyContact(&con);
+			printf("exit contact\n");
 			break;
 		default:
-			printf("选择错误");
+			printf("choose false\n");
 			break;
 		}
-	} while ();
-	return 0;
-
+	} while (1);
 }
