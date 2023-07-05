@@ -1,22 +1,24 @@
-#include <string.h>
+#include<stdio.h>
 
 int removeElement(int* nums, int numsSize, int val) {
+    int* cur = nums;
+    int j = 0;
     for (int i = 0; i < numsSize; i++)
     {
-        if (nums[i] == val)
+        if (nums[i] != val)
         {
-            memmove(nums+i, nums +i+ 1, (numsSize - i - 1)*4);
-            i--;
-            numsSize--;
+            *cur = nums[i];
+            cur++;
+            j++;
         }
-
     }
-    return numsSize;
+    return j;
 }
+
 int main()
 {
-    int arr[] = { 2,1,13,3,2 };
-    
-    removeElement(arr, 4, 2);
+    int nums[8] = { 0, 1, 2, 2, 3, 0, 4, 2 };
+    int j=removeElement(nums, 8, 2);
+
     return 0;
 }
