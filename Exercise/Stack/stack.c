@@ -13,7 +13,7 @@ void STDestroy(ST* pst)
 	assert(pst);
 	free(pst->a);
 	pst->a = NULL;
-	pst->top = pst->capacity = NULL;
+	pst->top = pst->capacity = 0;
 }
 void STPush(ST* pst, STDataType x)
 {
