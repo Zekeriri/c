@@ -112,8 +112,91 @@ void SelectSort(int* a, int n)
 		end--;
 	}
 }
-void HeapSort(int* a, int n);
-void QuickSort(int* a, int begin, int end);
+//void HeapSort(int* a, int n)
+//{
+//	for (int i = (n - 1 - 1) / 2; i >= 0; i--)
+//	{
+//		AdjustDown(a, n, i);
+//	}
+//	int end = n - 1;
+//	while (end > 0)
+//	{
+//		Swap(&a[0], &a[end]);
+//		AdjustDown(a, end, 0);
+//		end--;
+//	}
+//}
+int partion(int* a, int begin, int end)
+{
+	return begin;
+}
+void QuickSort(int* a, int begin, int end)
+{
+	////1.hoare版本
+	//if (end - begin <= 1)
+	//	return;
+	//int left = begin;
+	//int right = end-1;
+	//// 按照基准值对array数组的 [left, right)区间中的元素进行划分
+	//int div = partion(a, left, right);
+	//while (left < right)
+	//{
+	//	while (left<right && a[right] >= a[div])
+	//	{
+	//		right--;
+	//	}
+	//	while (left<right && a[left] <= a[div])
+	//	{
+	//		left++;
+	//	}
+	//	Swap(&a[left], &a[right]);
+	//}
+	//Swap(&a[left], &a[div]);
+	//div = left;
+	//// 划分成功后以div为边界形成了左右两部分 [left, div) 和 [div+1, right)
+	//// 递归排[left, div)
+	//QuickSort(a, begin, div);
+	//// 递归排[div+1, right)
+	//QuickSort(a, div + 1, end);
+
+	////2.挖坑法
+	//if (end - begin <= 1)
+	//	return;
+	//int left = begin;
+	//int right = end - 1;
+	//int pivot = partion(a, begin, end);
+	//while (left < right)
+	//{
+	//	while (left < right && a[right] >= a[pivot])
+	//	{
+	//		right--;
+	//	}
+	//	Swap(&a[right], &a[pivot]);
+	//	pivot = right;
+
+	//	while (left < right && a[left] <= a[pivot])
+	//	{
+	//		left++;
+	//	}
+	//	Swap(&a[left], &a[pivot]);
+	//	pivot = left;
+	//}
+	////Swap(&a[left], &a[pivot]);
+	//QuickSort(a, begin, pivot);
+	//QuickSort(a, pivot + 1, end);
+
+	//前后指针版本
+	if (end - begin <= 1)
+		return;
+	int prev = begin;
+	int cur = begin+1;
+	int pivot = partion(a, begin, end);
+	while (cur < end)
+	{
+		if (cur)
+	}
+
+}
 void QuickSortNonR(int* a, int begin, int end);
 void MergeSort(int* a, int n);
 void MergeSortNonR(int* a, int n);

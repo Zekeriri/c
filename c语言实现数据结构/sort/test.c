@@ -6,14 +6,12 @@ void TestInsertSort()
 	InsertSort(a, sizeof(a) / sizeof(int));
 	PrintArray(a, sizeof(a) / sizeof(int));
 }
-
 void TestShellSort()
 {
 	int a[] = { 2,4,3,1,4,9,0,8,8,4 };
 	ShellSort(a, sizeof(a) / sizeof(int));
 	PrintArray(a, sizeof(a) / sizeof(int));
 }
-
 void TestBubbleSort()
 {
 	int a[] = { 2,4,3,1,4,9,0,8,8,4 };
@@ -24,6 +22,12 @@ void TestSelectSort()
 {
 	int a[] = { 2,4,3,1,4,9,0,8,8,4 };
 	SelectSort(a, sizeof(a) / sizeof(int));
+	PrintArray(a, sizeof(a) / sizeof(int));
+}
+void TestQuickSort()
+{
+	int a[] = { 2,4,3,1,4,9,0,8,8,4 };
+	QuickSort(a, 0,sizeof(a) / sizeof(int));
 	PrintArray(a, sizeof(a) / sizeof(int));
 }
 
@@ -94,5 +98,6 @@ int main()
 	//TestShellSort();
 	//TestBubbleSort();
 	//TestOP();
-	TestSelectSort();
+	//TestSelectSort();
+	TestQuickSort();
 }

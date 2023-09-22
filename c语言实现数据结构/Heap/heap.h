@@ -34,3 +34,7 @@ int HeapSize(Heap* hp);
 int HeapEmpty(Heap* hp);
 // ¶ÑµÄÀ©ÈÝ
 void CheckCapacity(Heap* hp);
+// TopK
+void PrintTopK(int* a, int n, int k);
+// ¶ÑÅÅÐò
+void HeapSort(int* a, int n);

@@ -1,7 +1,28 @@
 #include "heap.h"
 
 // 堆的构建
-void HeapCreate(Heap* hp, HPDataType* a, int n);
+void HeapCreate(Heap* hp, HPDataType* a, int n)
+{
+	assert(hp && a);
+	hp->_a = (HPDataType*)malloc(sizeof(HPDataType)*n);
+	if (hp->_a == NULL)
+	{
+		perror("malloc fail");
+		return;
+	}
+	hp->_capacity = n;
+	hp->_size = n;
+
+	for (int i = 0; i < n; i++)
+	{
+		hp->_a[i] = a[i];
+	}
+
+	for (int i = (n-1-1)/2; i >=0 ; i--)
+	{
+		AdjustDown(hp->_a, hp->_size, i);
+	}
+}
 // 堆的初始化
 void HeapInit(Heap* hp)
 {
@@ -30,7 +51,7 @@ void AdjustUp(HPDataType* a, int child)
 	int parent = (child - 1) / 2;
 	while (child > 0)
 	{
-		if (a[child] > a[parent])
+		if (a[child] < a[parent])
 		{
 			Swap(&a[child], &a[parent]);
 			child = parent;
@@ -48,11 +69,11 @@ void AdjustDown(HPDataType* a, int n, int parent)
 	int child = parent * 2 + 1;
 	while (child < n)
 	{
-		if (child+1<n && a[child] < a[child + 1])
+		if (child+1<n && a[child] > a[child + 1])
 		{
 			child = child + 1;
 		}
-		if (a[parent] < a[child])
+		if (a[parent] > a[child])
 		{
 			Swap(&a[parent], &a[child]);
 			parent = child;
@@ -115,5 +136,42 @@ void CheckCapacity(Heap*hp)
 		}
 		hp->_a = tmp;
 		hp->_capacity = newCapacity;
+	}
+}
+// TopK
+void PrintTopK(int* a, int n, int k)
+{
+	// 1. 建堆--用a中前k个元素建堆
+	Heap hp1;
+	HeapInit(&hp1);
+	HeapCreate(&hp1, a, k);
+	// 2. 将剩余n-k个元素依次与堆顶元素交换，不满则替换
+	for (int i = k; i < n; i++)
+	{
+		if (a[i] > hp1._a[0])
+		{
+			hp1._a[0] = a[i];
+		}
+		AdjustDown(hp1._a, k, 0);
+	}
+	for (int i = 0; i < k; i++)
+	{
+		printf("%d ", hp1._a[i]);
+	}
+	printf("\n");
+}
+// 堆排序
+void HeapSort(int* a, int n)
+{
+	for (int i = (n-1-1)/2; i >=0 ; i--)
+	{
+		AdjustDown(a, n, i);
+	}
+	int end = n - 1;
+	while (end > 0)
+	{
+		Swap(&a[0], &a[end]);
+		AdjustDown(a, end, 0);
+		end--;
 	}
 }
