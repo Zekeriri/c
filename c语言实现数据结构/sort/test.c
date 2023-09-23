@@ -26,11 +26,23 @@ void TestSelectSort()
 }
 void TestQuickSort()
 {
-	int a[] = { 2,4,3,1,4,9,0,8,8,4 };
-	QuickSort(a, 0,sizeof(a) / sizeof(int));
+	int a[] = { 2,4,3,1,4,9,0,8,8,4,2,4,3,1,4,9,0,8,8,4,2,4,3,1,4,9,0,8,8,4,2,4,3,1,4,9,0,8,8,4,2,4,3,1,4,9,0,8,8,4 };
+	QuickSortNonR(a, 0,sizeof(a) / sizeof(int));
+	//QuickSort(a, 0, sizeof(a) / sizeof(int));
 	PrintArray(a, sizeof(a) / sizeof(int));
 }
-
+void TestMergeSort()
+{
+	int a[] = { 2,4,3,1,4,9,0,8,8,4 };
+	MergeSortNonR(a, sizeof(a) / sizeof(int));
+	PrintArray(a, sizeof(a) / sizeof(int));
+}
+void TestCountSort()
+{
+	int a[] = { 2,4,3,1,4,9,0,8,8,4 };
+	CountSort(a, sizeof(a) / sizeof(int));
+	PrintArray(a, sizeof(a) / sizeof(int));
+}
 void TestOP()
 {
 	srand(time(0));
@@ -91,7 +103,6 @@ void TestOP()
 	//free(a5);
 	//free(a6);
 }
-
 int main()
 {
 	//TestInsertSort();
@@ -99,5 +110,6 @@ int main()
 	//TestBubbleSort();
 	//TestOP();
 	//TestSelectSort();
-	TestQuickSort();
+	//TestQuickSort();
+	TestCountSort();
 }
