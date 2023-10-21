@@ -1,12 +1,18 @@
-
+#pragma once
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<assert.h>
+#include<iostream>
+#include<string.h>
+using namespace std;
 namespace dl
 {
     class string
     {
-        friend ostream& operator<<(ostream& _cout, const bit::string& s);
-        friend istream& operator>>(istream& _cin, bit::string& s);
+        friend ostream& operator<<(ostream& _cout, const dl::string& s);
+        friend istream& operator>>(istream& _cin, dl::string& s);
     public:
         typedef char* iterator;
+        typedef const char* const_iterator;
     public:
         string(const char* str = "");
         string(const string& s);
@@ -15,6 +21,8 @@ namespace dl
         // iterator
         iterator begin();
         iterator end();
+        const const_iterator begin() const;
+        const const_iterator end() const;
         // modify
         void push_back(char c);
         string& operator+=(char c);
@@ -26,7 +34,6 @@ namespace dl
         // capacity
         size_t size()const;
         size_t capacity()const;
-        bool empty()const;
         void resize(size_t n, char c = '\0');
         void reserve(size_t n);
         // access
@@ -47,10 +54,13 @@ namespace dl
         string& insert(size_t pos, char c);
         string& insert(size_t pos, const char* str);
         // 删除pos位置上的元素，并返回该元素的下一个位置
-        string& erase(size_t pos, size_t len);
+        string& erase(size_t pos, size_t len=npos);
     private:
         char* _str;
-        size_t _capacity;
         size_t _size;
+        size_t _capacity;
+    public:
+        const static size_t npos;
     };
+    const size_t string::npos = -1;
 }
