@@ -61,6 +61,18 @@ namespace dl
 		}
 		cout << endl;
 	}
+
+	void func(const list<int>& lt)
+	{
+		list<int>::const_reverse_iterator rit = lt.rbegin();
+		while (rit != lt.rend())
+		{
+			cout << *rit << " ";
+			++rit;
+		}
+		cout << endl;
+	}
+
 	void test_list4()
 	{
 		list<int> lt;
@@ -76,7 +88,9 @@ namespace dl
 			cout << *it<<" ";
 			++it;
 		}
+		//func(lt);
 	}
+
 }
 int main()
 {
