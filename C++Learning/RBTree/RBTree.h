@@ -244,7 +244,34 @@ public:
 		cout << root->_kv.first << " ";
 		_InOrder(root->_right);
 	}
-	bool Check(Node)
+	bool Check(Node* root,int blacknum,const int refVal)
+	{
+		if (root==nullptr)
+		{
+			//cout << blacknum << endl;
+			if (blacknum != refVal)
+			{
+				cout << "存在黑色节点数量不相等的路径" << endl;
+				return false;
+			}
+			return true;
+		}
+		if (root->_col==RED)
+		{
+			if (root->_col==RED&&root->_parent->_col==RED)
+			{
+				cout << "有连续的红色节点" << endl;
+				return false;
+			}
+		}
+
+		if (root->_col == BLACK)
+		{
+			++blacknum;
+		}
+		return Check(root->_left,blacknum,refVal)
+			&& Check(root->_right,blacknum,refVal);
+	}
 	bool IsBalance()
 	{
 		if (_root==nullptr)
@@ -255,10 +282,70 @@ public:
 		{
 			return false;
 		}
-		
+
+		int refVal = 0;
+		Node* cur = _root;
+		while (cur)
+		{
+			if (cur->_col == BLACK)
+			{
+				++refVal;
+			}
+			cur = cur->_left;
+		}
+		int blacknum = 0;
+		return Check(_root,blacknum,refVal);
 	}
 
+	int Height()
+	{
+		return _Height(_root);
+	}
+	int _Height(Node* root)
+	{
+		if(root == nullptr)
+		{
+			return 0;
+		}
+		int leftHeight = _Height(root->_left);
+		int rightHeight = _Height(root->_right);
+		return leftHeight > rightHeight ? leftHeight + 1 : rightHeight + 1;
+	}
 
+	size_t Size()
+	{
+		return _Size(_root);
+	}
+	size_t _Size(Node* root)
+	{
+		if (root==nullptr)
+		{
+			return 0;
+		}
+
+		return _Size(root->_left)
+			+ _Size(root->_right) + 1;
+	}
+	
+	Node* Find(const K& key)
+	{
+		Node* cur = _root;
+		while (cur)
+		{
+			if (cur->_kv.first < key)
+			{
+				cur = cur->_right;
+			}
+			else if (cur->_kv.first > key)
+			{
+				cur=cur->_left;
+			}
+			else
+			{
+				return cur;
+			}
+		}
+	}
 private:
 	Node* _root = nullptr;
 };

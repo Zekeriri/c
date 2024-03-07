@@ -1,35 +1,25 @@
 #include<iostream>
 #include<vector>
+#include<algorithm>
+#include<unordered_map>
 using namespace std;
-void singleNumber(vector<int> nums) {
-    int bitmark = 1;
-    int group1 = 0;
-    int group2 = 0;
-    int xor_result = 0;
-    for (auto e : nums)
+
+void TestListIterator1()
+{
+    int array[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+    list<int> l(array, array + sizeof(array) / sizeof(array[0]));
+
+    auto it = l.begin();
+    while (it != l.end())
     {
-        xor_result ^= e;
+        // erase()函数执行后，it所指向的节点已被删除，因此it无效，在下一次使用it时，必须先给其赋值
+        l.erase(it++);
+        
     }
-    while ((xor_result & bitmark) == 0)
-    {
-        bitmark <<= 1;
-    }
-    for (auto e : nums)
-    {
-        if ((bitmark & e) != 0)
-        {
-            group1 ^= e;
-        }
-        else
-        {
-            group2 ^= e;
-        }
-    }
-    cout<<group1<<" "<<group2;
 }
 
 int main()
 {
-    singleNumber({ 1,2,1,3,2,5 });
-    return 0;
+    TestListIterator1();
+	return 0;
 }
