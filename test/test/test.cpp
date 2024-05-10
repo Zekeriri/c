@@ -1,25 +1,26 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
 #include<iostream>
 #include<vector>
 #include<algorithm>
 #include<unordered_map>
 using namespace std;
 
-void TestListIterator1()
+void Test(void)
 {
-    int array[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
-    list<int> l(array, array + sizeof(array) / sizeof(array[0]));
-
-    auto it = l.begin();
-    while (it != l.end())
+    char* str = (char*)malloc(100);
+    strcpy(str, "hello");
+    free(str);
+    if (str != NULL)
     {
-        // erase()函数执行后，it所指向的节点已被删除，因此it无效，在下一次使用it时，必须先给其赋值
-        l.erase(it++);
-        
+        strcpy(str, "world");
+        printf(str);
     }
 }
 
+
 int main()
 {
-    TestListIterator1();
+    Test();
 	return 0;
 }
